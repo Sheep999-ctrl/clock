@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<title>Simple Clock Widget</title>
+<style>
+  body {
+    margin: 0;
+    background: transparent; /* 透明背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  }
+  #clock {
+    font-size: 48px;  /* 文字サイズは後で自由に変更可 */
+    font-weight: 600;
+    color: #ffffff;   /* 白文字 */
+    letter-spacing: 2px;
+  }
+</style>
+</head>
+<body>
+  <div id="clock">00:00</div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById("clock").textContent = `${h}:${m}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>
