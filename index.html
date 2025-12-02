@@ -15,17 +15,18 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-        font-family: "Courier New", Courier, monospace; /* Typewriter調 */
+        font-family: serif; /* タイプライタ調 → serif */
         font-size: 36pt;
-        font-weight: 300; /* 細字 */
-        line-height: 1;
+        font-weight: 300;
+        line-height: 1; /* 上下余白を詰める */
+        letter-spacing: -2px; /* 文字間隔を詰める（必要なら微調整OK） */
         color: #000000;
     }
 
     #clock {
-        /* 余白を完全にゼロに */
         margin: 0;
         padding: 0;
+        line-height: 1; /* ディブ自体の上下余白もゼロに */
     }
 </style>
 </head>
