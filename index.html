@@ -12,16 +12,15 @@
 
     body {
         display: flex;
-        justify-content: flex-start; /* 左詰め */
+        justify-content: flex-start; /* 左寄せ */
         align-items: center;
         height: 100vh;
         font-family: "Georgia", serif;
         font-size: 36pt;
-        font-weight: 300;
-        line-height: 0.85;
-        letter-spacing: -4px;
-        color: #8F8B7F; /* ← #A6A299 より少し濃い色 */
-        padding-left: 0;
+        font-weight: 200;              /* 数字の見た目を揃える */
+        line-height: 0.82;             /* デジタル時計のように詰める */
+        letter-spacing: -3.2px;        /* 幅を均質にする調整 */
+        color: #8F8B7F;                /* 少し濃いトーン */
     }
 
     #clock {
@@ -32,12 +31,12 @@
     }
 
     #colon {
-        font-size: 0.65em;
-        opacity: 0.6;
-        margin: 0 -6px;
+        font-size: 0.55em;             /* より控えめに */
+        opacity: 0.55;                 /* 存在感をさらに弱める */
+        margin: 0 -5px;                /* 数字と一体感を持たせる */
         font-weight: 200;
         position: relative;
-        top: -2px;
+        top: -1px;                     /* 若干だけ上に */
     }
 </style>
 </head>
@@ -49,11 +48,9 @@ function updateClock() {
     const now = new Date();
     const h = String(now.getHours()).padStart(2, "0");
     const m = String(now.getMinutes()).padStart(2, "0");
-
     document.getElementById("clock").innerHTML =
         `${h}<span id="colon">:</span>${m}`;
 }
-
 updateClock();
 setInterval(updateClock, 1000);
 </script>
