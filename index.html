@@ -12,21 +12,33 @@
 
     body {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start; /* 左詰め */
         align-items: center;
         height: 100vh;
-        font-family: serif; /* タイプライタ調 → serif */
+        font-family: "Georgia", serif; /* スタイリッシュな serif */
         font-size: 36pt;
         font-weight: 300;
-        line-height: 1; /* 上下余白を詰める */
-        letter-spacing: -2px; /* 文字間隔を詰める（必要なら微調整OK） */
+        line-height: 0.85; /* 上下の詰めをさらに強化 */
+        letter-spacing: -4px; /* ギュッと詰める */
         color: #000000;
+        padding-left: 0;
     }
 
     #clock {
         margin: 0;
         padding: 0;
-        line-height: 1; /* ディブ自体の上下余白もゼロに */
+        display: flex;
+        align-items: center;
+    }
+
+    /* 「:」を控えめに */
+    #colon {
+        font-size: 0.65em;  /* 小さく */
+        opacity: 0.6;       /* 控えめに */
+        margin: 0 -6px;     /* 詰め方を微調整 */
+        font-weight: 200;
+        position: relative;
+        top: -2px;          /* 少し上げて繊細な印象に */
     }
 </style>
 </head>
@@ -38,8 +50,11 @@ function updateClock() {
     const now = new Date();
     const h = String(now.getHours()).padStart(2, "0");
     const m = String(now.getMinutes()).padStart(2, "0");
-    document.getElementById("clock").textContent = `${h}:${m}`;
+
+    document.getElementById("clock").innerHTML =
+        `${h}<span id="colon">:</span>${m}`;
 }
+
 updateClock();
 setInterval(updateClock, 1000);
 </script>
