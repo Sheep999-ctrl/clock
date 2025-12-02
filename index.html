@@ -1,57 +1,47 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
 <meta charset="UTF-8" />
-<title>Simple AM/PM Clock Widget</title>
 <style>
-  body {
-    margin: 0;
-    background: transparent; /* 背景透明 */
-    display: flex;
-    justify-content: flex-start; /* 左寄せ */
-    align-items: center;
-    height: 80vh;
-    font-family: "Noto Sans JP", "Arial Rounded MT Bold", "Arial", sans-serif; /* 丸ゴシック系 */
-    padding-left: 0px; /* 左の余白 */
-  }
+    html, body {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        overflow: hidden;
+    }
 
-  #clock {
-    font-size: 36px;   /* 時刻部分の大きさ */
-    font-weight: 10;  /* 細め */
-    color: #121e1a;    /* 文字色 */
-    letter-spacing: 1px;
-  }
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: "Courier New", Courier, monospace; /* Typewriter調 */
+        font-size: 36pt;
+        font-weight: 300; /* 細字 */
+        line-height: 1;
+        color: #000000;
+    }
 
-  #ampm {
-    font-size: 12px;   /* AM/PM を小さく */
-    vertical-align: super; /* 上付きで少し位置調整 */
-    margin-left: 2px;
-  }
+    #clock {
+        /* 余白を完全にゼロに */
+        margin: 0;
+        padding: 0;
+    }
 </style>
 </head>
 <body>
-  <div id="clock">00:00<span id="ampm">AM</span></div>
+<div id="clock"></div>
 
-  <script>
-    function updateClock() {
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
+<script>
+function updateClock() {
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2, "0");
+    const m = String(now.getMinutes()).padStart(2, "0");
+    document.getElementById("clock").textContent = `${h}:${m}`;
+}
+updateClock();
+setInterval(updateClock, 1000);
+</script>
 
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-
-      // 12時間表記
-      hours = hours % 12;
-      hours = hours ? hours : 12; // 0 → 12
-
-      const h = String(hours).padStart(2, '0');
-
-      document.getElementById("clock").firstChild.textContent = `${h}:${minutes}`;
-      document.getElementById("ampm").textContent = ampm;
-    }
-
-    setInterval(updateClock, 1000);
-    updateClock();
-  </script>
 </body>
 </html>
