@@ -1,58 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <style>
-    html, body {
+    body {
         margin: 0;
         padding: 0;
         background: transparent;
         overflow: hidden;
-    }
-
-    body {
-        display: flex;
-        justify-content: flex-start; /* 左寄せ */
-        align-items: center;
-        height: 100vh;
-        font-family: "Georgia", serif;
-        font-size: 36pt;
-        font-weight: 200;              /* 数字の見た目を揃える */
-        line-height: 0.9;             /* デジタル時計のように詰める */
-        letter-spacing: -3.2px;        /* 幅を均質にする調整 */
-        color: #A6A299;                /* 少し濃いトーン */
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                     "Noto Sans JP", sans-serif;
     }
 
     #clock {
         margin: 0;
         padding: 0;
-        display: flex;
-        align-items: center;
+        color: #a6a299;
+        font-size: 64px;
+        font-weight: 300;
+        text-align: left;
+        line-height: 1;
+        background: transparent;
     }
 
-    #colon {
-        font-size: 0.55em;             /* より控えめに */
-        opacity: 0.55;                 /* 存在感をさらに弱める */
-        margin: 0 -5px;                /* 数字と一体感を持たせる */
-        font-weight: 200;
-        position: relative;
-        top: -1px;                     /* 若干だけ上に */
+    #date {
+        margin: 0;
+        padding: 0;
+        color: #a6a299;
+        font-size: 18px;
+        font-weight: 300;
+        text-align: left;
+        line-height: 1.2;
+    }
+
+    .wrap {
+        margin: 0;
+        padding: 0;
+        background: transparent;
     }
 </style>
 </head>
+
 <body>
-<div id="clock"></div>
+<div class="wrap">
+    <div id="clock">00:00</div>
+    <div id="date"></div>
+</div>
 
 <script>
 function updateClock() {
     const now = new Date();
+
     const h = String(now.getHours()).padStart(2, "0");
     const m = String(now.getMinutes()).padStart(2, "0");
-    document.getElementById("clock").innerHTML =
-        `${h}<span id="colon">:</span>${m}`;
+
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const months = ["January","February","March","April","May","June","July",
+                    "August","September","October","November","December"];
+
+    const day = days[now.getDay()];
+    const date = now.getDate();
+    const month = months[now.getMonth()];
+
+    document.getElementById("clock").textContent = `${h}:${m}`;
+    document.getElementById("date").textContent = `${day}, ${date} ${month}`;
 }
-updateClock();
+
 setInterval(updateClock, 1000);
+updateClock();
 </script>
 
 </body>
